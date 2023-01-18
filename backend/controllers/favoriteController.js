@@ -2,7 +2,7 @@
 // @route   GET /api/favorites
 // @access  Private
 
-const getFavorites = (req, res) => {
+const getFavorites = async (req, res) => {
     res.status(200).json({ message: 'Get favorites' })
 }
 
@@ -10,7 +10,11 @@ const getFavorites = (req, res) => {
 // @route   POST /api/favorites
 // @access  Private
 
-const setFavorite = (req, res) => {
+const setFavorite = async (req, res) => {
+    if(!req.body.text) {
+        res.status(400)
+        throw new Error('Please add a text field')
+    }
     res.status(200).json({ message: 'Set favorite' })
 }
 
@@ -18,7 +22,7 @@ const setFavorite = (req, res) => {
 // @route   PUT /api/favorites/:id
 // @access  Private
 
-const updateFavorite = (req, res) => {
+const updateFavorite = async (req, res) => {
     res.status(200).json({ message: `Update favorite ${req.params.id}` })
 }
 
@@ -26,7 +30,7 @@ const updateFavorite = (req, res) => {
 // @route   DELETE /api/favorites/:id
 // @access  Private
 
-const deleteFavorite = (req, res) => {
+const deleteFavorite = async (req, res) => {
     res.status(200).json({ message: `Delete favorite ${req.params.id}` })
 }
 
