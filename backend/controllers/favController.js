@@ -7,6 +7,7 @@ const Favorite = require('../models/favModel')
 // @access  Private
 
 const getFavorites = asyncHandler(async (req, res) => {
+    const favorites = await Favorite.find(favorites)
     res.status(200).json({ message: 'Get favorites' })
 })
 
@@ -19,7 +20,12 @@ const setFavorite = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please add a text field')
     }
-    res.status(200).json({ message: 'Set favorite' })
+    const favorite = await Favorite.create({
+        text: req.body.text
+    })
+
+
+    res.status(200).json({favorite})
 })
 
 // @desc    Update favorite
@@ -27,7 +33,18 @@ const setFavorite = asyncHandler(async (req, res) => {
 // @access  Private
 
 const updateFavorite = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: `Update favorite ${req.params.id}` })
+    const favorite = await Favorite.findById(req.params.id)
+
+    if(!favorite) {
+        res.status(400)
+        throw new Error('Favorite not found')
+
+    }
+    const updatedFavorite = await Favorite.findByIdAndUpdate(req.params.id, req.
+        body, 
+        {new: true,
+        })
+    res.status(200).json(updatedFavorite)
 })
 
 // @desc    Delete favorite
