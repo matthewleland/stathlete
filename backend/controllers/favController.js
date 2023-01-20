@@ -7,7 +7,7 @@ const Favorite = require('../models/favModel')
 // @access  Private
 
 const getFavorites = asyncHandler(async (req, res) => {
-    const favorites = await Favorite.find(favorites)
+    const favorite = await Favorite.find(favorite)
     res.status(200).json({ message: 'Get favorites' })
 })
 
@@ -41,8 +41,8 @@ const updateFavorite = asyncHandler(async (req, res) => {
 
     }
     const updatedFavorite = await Favorite.findByIdAndUpdate(req.params.id, req.
-        body, 
-        {new: true,
+        body, {
+        new: true,
         })
     res.status(200).json(updatedFavorite)
 })
@@ -52,7 +52,16 @@ const updateFavorite = asyncHandler(async (req, res) => {
 // @access  Private
 
 const deleteFavorite = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: `Delete favorite ${req.params.id}` })
+    const favorite = await Favorite.findById(req.params.id)
+
+    if(!favorite) {
+        res.status(400)
+        throw new Error('Favorite not found')
+    }
+
+    await favorite.remove()
+
+    res.status(200).json({ id: req.params.id })
 })
 
 module.exports = {
