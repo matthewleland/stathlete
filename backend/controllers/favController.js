@@ -7,8 +7,9 @@ const Favorite = require('../models/favModel')
 // @access  Private
 
 const getFavorites = asyncHandler(async (req, res) => {
-    const favorite = await Favorite.find(favorite)
-    res.status(200).json({ message: 'Get favorites' })
+    const favorites = await Favorite.find()
+
+    res.status(200).json(favorites)
 })
 
 // @desc    Set favorite
@@ -25,7 +26,7 @@ const setFavorite = asyncHandler(async (req, res) => {
     })
 
 
-    res.status(200).json({favorite})
+    res.status(200).json(favorite)
 })
 
 // @desc    Update favorite
