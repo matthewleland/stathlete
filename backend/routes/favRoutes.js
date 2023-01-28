@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const { getFavorites, setFavorite, updateFavorite, deleteFavorite } = require('../controllers/favController')
 
-router.route('/').get(getFavorites).post(setFavorite)
-router.route('/:id').delete(deleteFavorite).put(updateFavorite)
+const {protect} = require('../middleware/authMiddleWare')
+
+router.route('/').get(protect, getFavorites).post(protect, setFavorite)
+router.route('/:id').delete(protect, deleteFavorite).put(protect, updateFavorite)
 
 module.exports = router

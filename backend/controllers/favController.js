@@ -1,13 +1,16 @@
+const { request } = require('express')
 const asyncHandler = require('express-async-handler')
 
 const Favorite = require('../models/favModel')
+const User = require('../models/userModel')
 
 // @desc    Get favorites
 // @route   GET /api/favorites
 // @access  Private
 
 const getFavorites = asyncHandler(async (req, res) => {
-    const favorites = await Favorite.find()
+    const favorites = await Favorite.find({ user: req.user.id })
+    //get specific users goal through an object which is user: 
 
     res.status(200).json(favorites)
 })
@@ -22,7 +25,8 @@ const setFavorite = asyncHandler(async (req, res) => {
         throw new Error('Please add a text field')
     }
     const favorite = await Favorite.create({
-        text: req.body.text
+        text: req.body.text,
+        user: req.user.id
     })
 
 
@@ -41,6 +45,21 @@ const updateFavorite = asyncHandler(async (req, res) => {
         throw new Error('Favorite not found')
 
     }
+
+    const user = await User.findById(req.user.id)
+
+    //checking for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //Make sure the log in users matches the favorites id user
+    if(deleteFavorite.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
     const updatedFavorite = await Favorite.findByIdAndUpdate(req.params.id, req.
         body, {
         new: true,
@@ -58,6 +77,20 @@ const deleteFavorite = asyncHandler(async (req, res) => {
     if(!favorite) {
         res.status(400)
         throw new Error('Favorite not found')
+    }
+
+    const user = await User.findById(req.user.id)
+
+    //checking for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //Make sure the log in users matches the favorites id user
+    if(deleteFavorite.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
     }
 
     await favorite.remove()
