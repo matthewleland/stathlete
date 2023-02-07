@@ -1,13 +1,9 @@
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
-const User = require('..models/userModel')
-// const { model } = require('mongoose')
-// const req = require('express/lib/request')
-// const { rawListeners } = require('../models/userModel')
+const User = require('../models/userModel')
 
 const protect = asyncHandler(async(req, res, next) => {
     let token
-
 
     if(req.headers.authorization && req.headers.authoization.startsWith('Bearer')){
         try {
@@ -37,4 +33,4 @@ const protect = asyncHandler(async(req, res, next) => {
 
 })
 
-model.exports = { protect }
+module.exports = { protect }

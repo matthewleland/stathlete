@@ -1,4 +1,3 @@
-const { request } = require('express')
 const asyncHandler = require('express-async-handler')
 
 const Favorite = require('../models/favModel')
