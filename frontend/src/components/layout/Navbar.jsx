@@ -25,42 +25,55 @@ function Navbar({ title }) {
             {title}
           </Link>
         </div>
-
-        <div className='flex-1 px-2 mx-2'>
-          <div className='flex justify-end'>
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <Link to='/' className='btn btn-ghost btn-sm rounded-btn'>
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link to='/search' className='btn btn-ghost btn-sm rounded-btn'>
-                  Search
-                </Link>
-              </li>
-              <li tabIndex={0}>
-                <Link to='/profile' className='btn btn-ghost btn-sm rounded-btn'>
-                  {user.name}
-                </Link>
-                <ul className="p-2 bg-base-100">
-                  <li>
-                    <Link to='/profile' className='btn btn-ghost btn-sm rounded-btn'>
-                      Profile
-                    </Link>
-                    <Link to='/favorites' className='btn btn-ghost btn-sm rounded-btn'>
-                      Favorites
-                    </Link>
-                  </li>
-                  <li>
-                    <button className="btn btn-ghost btn-sm rounded-btn">Log Out</button>
-                  </li>
-                </ul>
-              </li>
-
-            </ul>
+        {user ? (
+          <div className='flex-1 px-2 mx-2'>
+            <div className='flex justify-end'>
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <Link to='/' className='btn btn-ghost btn-sm rounded-btn'>
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/search' className='btn btn-ghost btn-sm rounded-btn'>
+                    Search
+                  </Link>
+                </li>
+                <li tabIndex={0}>
+                  <Link to='/profile' className='btn btn-ghost btn-sm rounded-btn'>
+                    {user.name}
+                  </Link>
+                  <ul className="p-2 bg-base-100">
+                    <li>
+                      <Link to='/profile' className='btn btn-ghost btn-sm rounded-btn'>
+                        Profile
+                      </Link>
+                      <Link to='/favorites' className='btn btn-ghost btn-sm rounded-btn'>
+                        Favorites
+                      </Link>
+                    </li>
+                    <li>
+                      <button className="btn btn-ghost btn-sm rounded-btn" onClick={onLogout}>Log Out</button>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+          ) : (
+            <ul>
+              <li>
+                <Link to='/login'>
+                  <FaSignInAlt />Login
+                </Link>
+              </li>
+              <li>
+                <Link to='/register'>
+                  <FaUser />Register
+                </Link>
+              </li>
+            </ul>
+            ) }
       </div>
     </nav>
   )

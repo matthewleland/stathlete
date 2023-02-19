@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import FavForm from '../components/FavForm'
 import FavItem from '../components/FavItem'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/layout/Spinner'
 import { getFavorites, reset } from '../features/favorites/favSlice'
 
 function Dashboard() {

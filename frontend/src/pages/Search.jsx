@@ -1,8 +1,10 @@
-import React from 'react'
+import SearchBar from "../components/layout/SearchBar"
 
 function Search() {
   return (
-    <div>Search</div>
+    <>
+      <SearchBar />
+    </>
   )
 }
 
