@@ -52,8 +52,6 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body
 
-    
-
     //check for user email
     const user = await User.findOne({email})
 
@@ -74,14 +72,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/me
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
-    const {_id, name, email} = await User.findById(req.use.id)
-
-    //when user logs in, they should be able to get this info, token and id, name, and email
-    res.status(200).json({
-        id: _id,
-        name,
-        email,
-    })
+    res.status(200).json(req.user)
 })
 
 // Generate JWT

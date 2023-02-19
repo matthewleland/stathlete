@@ -25,10 +25,11 @@ function Login() {
     }
 
     if (isSuccess || user) {
+      dispatch(reset())
       navigate('/')
     }
-
     dispatch(reset())
+
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {

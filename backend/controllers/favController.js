@@ -6,18 +6,16 @@ const User = require('../models/userModel')
 // @desc    Get favorites
 // @route   GET /api/favorites
 // @access  Private
-
 const getFavorites = asyncHandler(async (req, res) => {
     const favorites = await Favorite.find({ user: req.user.id })
-    //get specific users goal through an object which is user: 
 
+    //get specific users goal through an object which is user: 
     res.status(200).json(favorites)
 })
 
 // @desc    Set favorite
 // @route   POST /api/favorites
 // @access  Private
-
 const setFavorite = asyncHandler(async (req, res) => {
     if(!req.body.text) {
         res.status(400)
@@ -35,26 +33,22 @@ const setFavorite = asyncHandler(async (req, res) => {
 // @desc    Update favorite
 // @route   PUT /api/favorites/:id
 // @access  Private
-
 const updateFavorite = asyncHandler(async (req, res) => {
     const favorite = await Favorite.findById(req.params.id)
 
     if(!favorite) {
         res.status(400)
         throw new Error('Favorite not found')
-
     }
 
-    const user = await User.findById(req.user.id)
-
     //checking for user
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     //Make sure the log in users matches the favorites id user
-    if(deleteFavorite.user.toString() !== user.id) {
+    if(favorite.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -69,25 +63,21 @@ const updateFavorite = asyncHandler(async (req, res) => {
 // @desc    Delete favorite
 // @route   DELETE /api/favorites/:id
 // @access  Private
-
 const deleteFavorite = asyncHandler(async (req, res) => {
     const favorite = await Favorite.findById(req.params.id)
-
     if(!favorite) {
         res.status(400)
         throw new Error('Favorite not found')
     }
 
-    const user = await User.findById(req.user.id)
-
     //checking for user
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     //Make sure the log in users matches the favorites id user
-    if(deleteFavorite.user.toString() !== user.id) {
+    if(favorite.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }

@@ -15,6 +15,6 @@ app.use('/api/users', require('./routes/userRoutes'))
 
 app.use(errorHandler)
 
-const port = process.env.PORT || 5001
+const port = process.env.PORT || 8001
 app.listen(port, () => console.log(`\nServer listening on port ${port}...`.magenta))
 
