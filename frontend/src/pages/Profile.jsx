@@ -35,14 +35,16 @@ function Profile() {
                 </div>
             </div>
                 
-            <section className="heading" class="flex justify-center">
+            <section className="heading" class="flex justify-center mb-5">
                 <h2 className='underline' class='text-2xl font-bold'>Profile Information</h2>
             </section>
 
-            <div>
-                <p>Name: {user.name}</p>
-                <p>Email: {user.email}</p>
-            </div>
+            <section className='content' class='mx-5 p-5 rounded-md outline outline-offset-0 outline-828282 bg-slate-200'>
+                <div class='mx-2 text-black'>
+                    <p>Name: {user.name}</p>
+                    <p>Email: {user.email}</p>
+                </div>
+            </section>
         </>
     )
 }
