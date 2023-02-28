@@ -15,11 +15,11 @@ function FavForm() {
   }
 
   return (
-    <section className='form'>
+    <section className='form' class='m-5'>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="text">Favorite</label>
-          <input type="text" name="text" id='text' value={text} onChange={(e) => setText(e.target.value)}/>
+        <div className="form-group" class='flex flex-col justify-center mb-5'>
+          <p>Search for your favorite teams and players!</p>
+          <input type="text" name="text" placeholder="Search..." id='text' class='my-2' value={text} onChange={(e) => setText(e.target.value)}/>
         </div>
         <div className="form-group">
           <button className="btn btn-block" type='submit'>

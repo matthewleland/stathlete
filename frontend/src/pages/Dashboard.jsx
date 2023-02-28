@@ -35,17 +35,19 @@ function Dashboard() {
   }
   return (
     <>
-      <section className="heading">
-        <h2 className='underline'>Welcome {user && user.name}</h2>
-        <p>Favorites Dashboard</p>
+      <section className="heading" class='flex flex-row justify-center outline outline-offset-2 outline-blue-500'>
+        <div class='flex flex-col'>
+          <h2 className='underline'>Welcome {user && user.name}</h2>
+          <p>Favorites Dashboard</p>
+        </div>
       </section>
       <FavForm />
 
-      <section className="content">
+      <section className="content" class='m-5'>
         {favorites.length > 0 ? (
           <div className='favorites'>
             {favorites.map((favorite) => (
-              <FavItem key ={favorite._id} favorite={favorite} />
+              <FavItem key ={favorite._id} favorite={favorite} showDelete={false} />
             ))}
           </div>
         ) : (<h3>You have not added any favorites</h3>)}
