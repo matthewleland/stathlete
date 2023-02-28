@@ -34,13 +34,13 @@ function Favorites() {
     }
     return (
         <>
-            <section className="heading" class="flex justify-center">
-                <h2 className='underline' class='text-2xl font-bold'>Welcome to your Favorites Page</h2>
+            <section className="heading flex justify-center">
+                <h2 className='underline text-2xl font-bold'>Welcome to your Favorites Page</h2>
             </section>
             
             <FavForm />
 
-            <section className="content" class='m-5'>
+            <section className="content m-5">
                 {favorites.length > 0 ? (
                 <div className='favorites'>
                     {favorites.map((favorite) => (

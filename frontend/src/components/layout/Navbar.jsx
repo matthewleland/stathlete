@@ -60,19 +60,23 @@ function Navbar({ title }) {
               </ul>
             </div>
           </div>
-          ) : (
-            <ul>
-              <li>
-                <Link to='/login'>
-                  <FaSignInAlt />Login
-                </Link>
-              </li>
-              <li>
-                <Link to='/register'>
-                  <FaUser />Register
-                </Link>
-              </li>
-            </ul>
+        ) : (
+          <div className='flex-1 px-2 mx-2'>
+            <div className='flex justify-end'>
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <Link to='/login' className='btn btn-ghost btn-sm rounded-btn'>
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/register' className='btn btn-ghost btn-sm rounded-btn'>
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
             ) }
       </div>
     </nav>

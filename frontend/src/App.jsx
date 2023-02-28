@@ -13,7 +13,6 @@ function App() {
   return (
     <>
         <Router>
-          <div className="container">
             <Navbar />
             <Routes>
               <Route path='/' element={<Dashboard />} />
@@ -23,7 +22,6 @@ function App() {
               <Route path='/favorites' element={<Favorites />} />
               <Route path='/profile' element={<Profile />} />
             </Routes>
-          </div>
         </Router>
       <ToastContainer />
     </>

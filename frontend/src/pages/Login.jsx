@@ -55,17 +55,12 @@ function Login() {
   } else {
   return (
     <>
-      <section className="heading">
-        <h1>
-          <FaSignInAlt /> Login
-        </h1>
-        <p>Please enter your credentials.</p>
-      </section>
-      <section className="form">
-        <form className='flex flex-col' onSubmit={onSubmit}>
-          <div className="form-group">
+      <section className="form flex justify-center mt-10">
+        <form className='flex flex-col border-2 border-neutral rounded-lg px-5 ' onSubmit={onSubmit}>
+          <div className='text-3xl font-medium mt-5'>Sign In</div>
+          <div className="form-group my-3">
             <input
-              className="form-control"
+              className="input input-bordered w-full max-w-xs"
               type="text"
               id="email"
               name='email'
@@ -74,9 +69,9 @@ function Login() {
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group my-3">
             <input
-              className="form-control"
+              className="input input-bordered w-full max-w-xs"
               type="password"
               id="password"
               name='password'
@@ -85,7 +80,7 @@ function Login() {
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group my-3 mb-5">
             <button type='submit' className='btn btn-block'>
               Login
             </button>

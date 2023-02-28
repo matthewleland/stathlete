@@ -35,15 +35,11 @@ function Dashboard() {
   }
   return (
     <>
-      <section className="heading" class='flex flex-row justify-center outline outline-offset-2 outline-blue-500'>
-        <div class='flex flex-col'>
-          <h2 className='underline'>Welcome {user && user.name}</h2>
-          <p>Favorites Dashboard</p>
-        </div>
+      <section className="heading flex m-5">
+         <h2 className='text-2xl font-bold'>Dashboard - {user.name}</h2>
       </section>
-      <FavForm />
 
-      <section className="content" class='m-5'>
+      <section className="content m-5">
         {favorites.length > 0 ? (
           <div className='favorites'>
             {favorites.map((favorite) => (

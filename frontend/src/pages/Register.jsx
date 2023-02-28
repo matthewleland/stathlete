@@ -57,66 +57,61 @@ function Register() {
   } else {
     return (
       <>
-        <section className="heading">
-          <h1>
-            <FaUser /> Register
-          </h1>
-          <p>Please create an account.</p>
-        </section>
-        <section className="form">
-          <form onSubmit = {onSubmit} className='flex flex-col'>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                id="name"
-                name='name'
-                value={name}
-                placeholder="Enter your name"
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                id="email"
-                name='email'
-                value={email}
-                placeholder="Enter your email"
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="password"
-                id="password"
-                name='password'
-                value={password}
-                placeholder="Enter password"
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                className="form-control"
-                type="password"
-                id="password2"
-                name='password2'
-                value={password2}
-                placeholder="Confirm password"
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <button type='submit' className='btn btn-block'>
-                Submit
-              </button>
-            </div>
-          </form>
-        </section>
-      </>
+      <section className="form flex justify-center mt-10">
+        <form className='flex flex-col border-2 border-neutral rounded-lg px-5' onSubmit={onSubmit}>
+          <div className='text-3xl font-medium mt-5'>Create Account</div>
+          <div className="form-group my-3">
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="text"
+              id="name"
+              name='name'
+              value={name}
+              placeholder="Enter name"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group my-3">
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="text"
+              id="email"
+              name='email'
+              value={email}
+              placeholder="Enter email"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group my-3">
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="password"
+              id="password"
+              name='password'
+              value={password}
+              placeholder="Enter password"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group my-3">
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="password"
+              id="password2"
+              name='password2'
+              value={password2}
+              placeholder="Confirm password"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group my-3 mb-5">
+            <button type='submit' className='btn btn-block'>
+              Register
+            </button>
+          </div>
+        </form>
+      </section>
+    </>
     )
   }
 }
