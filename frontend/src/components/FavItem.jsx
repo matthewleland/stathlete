@@ -10,11 +10,6 @@ function FavItem({favorite, showDelete}) {
   return (
     <>
     <div className='flex flex-row justify-between'>
-<<<<<<< HEAD
-      <h4 className='text-xs' class='text-base'>{favorite.text}</h4>
-      {showDelete 
-        ? 
-=======
     <div className='card shadow-md compact side bg-base-100'>
       <div className='flex-row items-center space-x-4 card-body'>
         <div>
@@ -36,9 +31,8 @@ function FavItem({favorite, showDelete}) {
       </div>
     </div>
       {showDelete ? 
->>>>>>> 6f2c90f (update ui)
         <button onClick={() => dispatch(deleteFavorite(favorite._id))} className="close">
-          <p class='text-red-500'>Delete Favorite</p>
+          <p clasName='text-red-500'>Delete Favorite</p>
         </button>
         : null
       }

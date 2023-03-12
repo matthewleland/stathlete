@@ -34,13 +34,8 @@ function Profile() {
                 <img className="w-20 h-20 rounded-full flex justify-center items-center outline outline-offset-2 outline-blue-500" src={DefaultProfile} alt="profile" />
             </div>
                 
-<<<<<<< HEAD
-            <section className="heading" class="flex justify-center mb-5">
-                <h2 className='underline' class='text-2xl font-bold'>User Information</h2>
-=======
             <section className="heading flex justify-center mb-5">
                 <h2 className='underline text-2xl font-bold'>Profile Information</h2>
->>>>>>> 6f2c90f (update ui)
             </section>
 
             <section className='content mx-5 p-5 rounded-md outline outline-offset-0 outline-828282 bg-slate-200'>
@@ -50,12 +45,12 @@ function Profile() {
                 </div>
             </section>
 
-            <section className="heading" class="flex justify-center my-5">
-                <h2 className='underline' class='text-2xl font-bold'>Subscription Information</h2>
+            <section className="heading flex justify-center my-5">
+                <h2 className='underline text-2xl font-bold'>Subscription Information</h2>
             </section>
 
-            <section className='content' class='mx-5 p-5 rounded-md outline outline-offset-0 outline-828282 bg-slate-200'>
-                <div class='mx-2 text-black flex flex-column justify-center'>
+            <section className='content mx-5 p-5 rounded-md outline outline-offset-0 outline-828282 bg-slate-200'>
+                <div className='mx-2 text-black flex flex-column justify-center'>
                     <p>Subscription Status</p>
                 </div>
             </section>
