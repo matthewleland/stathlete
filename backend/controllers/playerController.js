@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const { models } = require('mongoose')
 
 const Player = require('../models/playerModel')
 
@@ -9,7 +10,7 @@ const createPlayer = asyncHandler(async (req, res) => {
 
   const { id, first_name, last_name, full_name } = req.body
 
-  const player = Player.create({
+  const player = await Player.create({
     playerId: id,
     firstName: first_name,
     lastName: last_name,
@@ -17,12 +18,7 @@ const createPlayer = asyncHandler(async (req, res) => {
   })
 
   if (player) {
-    res.status(201).json({
-      _id: player.playerId,
-      firstName: player.firstName,
-      lastName: player.lastName,
-      fullName: player.fullName
-    })
+    res.status(201).json(player)
   } else {
     res.status(400)
     throw new Error('Invalid user data')
@@ -32,23 +28,19 @@ const createPlayer = asyncHandler(async (req, res) => {
 const searchPlayers = asyncHandler(async (req, res) => {
   const { text } = req.body
 
-  Player.createIndexes({ fullName: "text", fullplot: "text"})
-
-  const query = { $text: { $search: text } }
-
-  const projection = {
-    playerId: 0,
-    fullName: 1,
-  };
-
-
-  const results = Player.find(query).projection(projection)
+  const results = await models.Player.find({
+    fullName: new RegExp(`.*${text}.*`, 'i') 
+  })
 
   console.log(results)
 
-  res.sendStatus(200)
-
-
+  if (results) {
+    res.status(200).json(results)
+  } else {
+    res.status(400)
+    throw new Error('Error executign')
+  }
+  
 })
 
 module.exports = {
