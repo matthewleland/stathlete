@@ -6,26 +6,31 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: ''
+  message: '',
 }
 
-export const searchPlayers = createAsyncThunk('players/search', async (text, thunkAPI) => {
-  try {
-    // const token = thunkAPI.getState().auth.user.token
+export const searchPlayers = createAsyncThunk(
+  'players/search',
+  async (query, thunkAPI) => {
+    try {
+      // const token = thunkAPI.getState().auth.user.token
 
-    return await searchService.searchPlayers(text)
-
-  } catch (err) {
-    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString()
-    return thunkAPI.rejectWithValue(message)
+      return await searchService.searchPlayers(query.text)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
   }
-})
+)
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    reset: (state) => initialState
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -36,7 +41,6 @@ export const searchSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.results.push(action.payload)
-        console.log(action.payload)
       })
       .addCase(searchPlayers.rejected, (state, action) => {
         state.isLoading = false
@@ -44,7 +48,7 @@ export const searchSlice = createSlice({
         state.isSuccess = false
         state.message = action.payload
       })
-  }
+  },
 })
 
 export const { reset } = searchSlice.actions
