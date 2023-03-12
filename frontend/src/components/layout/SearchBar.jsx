@@ -1,14 +1,19 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { searchPlayers } from '../../features/search/searchSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { searchPlayers, reset } from '../../features/search/searchSlice'
 
 function SearchBar() {
   const [text, setText] = useState('')
   const dispatch = useDispatch()
 
+  const { results, isLoading, isError, message } = useSelector(
+    (state) => state.search
+  )
+
   const handleChange = (e) => setText(e.target.value)
 
   const handleSubmit = async (e) => {
+    dispatch(reset())
     e.preventDefault()
     dispatch(searchPlayers({ text }))
     console.log(text)
