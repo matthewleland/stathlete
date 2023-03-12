@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Spinner from './Spinner'
-import PlayerItem from '../PlayerItem'
+import Spinner from '../layout/Spinner'
+import PlayerItem from '../layout/PlayerItem'
 
 import { searchPlayers, reset } from '../../features/search/searchSlice'
 

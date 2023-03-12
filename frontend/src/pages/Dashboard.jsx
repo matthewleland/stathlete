@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import FavForm from '../components/FavForm'
-import FavItem from '../components/FavItem'
+import FavForm from '../components/layout/FavForm'
+import FavItem from '../components/layout/FavItem'
 import Spinner from '../components/layout/Spinner'
 import { getFavorites, reset } from '../features/favorites/favSlice'
 
@@ -11,7 +11,9 @@ function Dashboard() {
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const { favorites, isLoading, isError, message } = useSelector((state) => state.favorites)
+  const { favorites, isLoading, isError, message } = useSelector(
+    (state) => state.favorites
+  )
 
   useEffect(() => {
     if (isError) {
@@ -28,26 +30,30 @@ function Dashboard() {
       dispatch(reset())
     }
   }, [user, navigate, isError, message, dispatch])
-  
 
   if (isLoading) {
     return <Spinner />
   }
   return (
     <>
-      <section className="heading flex m-5">
-         <h2 className='text-2xl font-bold'>Dashboard - {user.name}</h2>
-      </section>
+      <header className="heading flex m-5">
+        <h2 className="text-2xl font-bold">Dashboard - {user.name}</h2>
+      </header>
 
-      <section className="content m-5">
+      <div>
         {favorites.length > 0 ? (
-          <div className='favorites'>
+          <div className="grid grid-cols-1 gap-3 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 mx-4">
             {favorites.map((favorite) => (
-              <FavItem key ={favorite._id} favorite={favorite} showDelete={false} />
+              <FavItem
+                key={favorite._id}
+                favorite={favorite}
+              />
             ))}
           </div>
-        ) : (<h3>You have not added any favorites</h3>)}
-      </section>
+        ) : (
+          <h3>You have not added any favorites</h3>
+        )}
+      </div>
     </>
   )
 }

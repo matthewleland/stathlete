@@ -1,5 +1,5 @@
-import SearchBar from "../components/layout/SearchBar"
-import SearchResults from "../components/layout/SearchResults"
+import SearchBar from '../components/search/SearchBar'
+import SearchResults from '../components/search/SearchResults'
 
 function Search() {
   return (

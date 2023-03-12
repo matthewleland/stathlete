@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
-import { deleteFavorite } from '../features/favorites/favSlice'
+import { deleteFavorite } from '../../features/favorites/favSlice'
 import { Link } from 'react-router-dom'
-import DefaultProfile from '../assets/profile.svg'
+import DefaultProfile from '../../assets/profile.svg'
 
 function FavItem({ favorite, showDelete }) {
   const dispatch = useDispatch()
