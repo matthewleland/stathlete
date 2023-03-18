@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
 // get user from localStorage
@@ -12,21 +12,30 @@ const initialState = {
 }
 
 // register user
-export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
-  try {
-    return await authService.register(user)
-  } catch (err) {
-    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString()
-    return thunkAPI.rejectWithValue(message)
+export const register = createAsyncThunk(
+  'auth/register',
+  async (user, thunkAPI) => {
+    try {
+      return await authService.register(user)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
   }
-})
+)
 
 // login user
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user)
   } catch (err) {
-    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString()
+    const message =
+      (err.response && err.response.data && err.response.data.message) ||
+      err.message ||
+      err.toString()
     return thunkAPI.rejectWithValue(message)
   }
 })
@@ -44,7 +53,7 @@ export const authSlice = createSlice({
       state.isError = false
       state.isSuccess = false
       state.message = ''
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -79,7 +88,7 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
-  }
+  },
 })
 
 export const { reset } = authSlice.actions

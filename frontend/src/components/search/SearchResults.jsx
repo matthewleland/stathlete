@@ -32,7 +32,7 @@ function SearchResults() {
           ))}
         </div>
       ) : (
-        <h3>Search for your favorite players and teams</h3>
+        <h3 className="m-8">Search for your favorite players and teams</h3>
       )}
     </div>
   )

@@ -1,18 +1,18 @@
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import DefaultProfile from '../../assets/profile.svg'
-import { createFavorite } from '../../features/favorites/favSlice'
+import { getPlayerDetails } from '../../features/player/playerSlice'
 
 function PlayerItem({ player }) {
+  const navigate = useNavigate()
   const IMG_URL = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.playerId}.png`
 
   const teamId = player.teams[player.teams.length]
   console.log(teamId)
   const dispatch = useDispatch()
 
-  const addFav = (e) => {
-    dispatch(createFavorite(player))
-    console.log(player)
+  const onViewDetails = (e) => {
+    dispatch(getPlayerDetails(player))
   }
 
   return (
@@ -65,10 +65,10 @@ function PlayerItem({ player }) {
               Exit
             </label>
             <button
-              onClick={addFav}
+              onClick={onViewDetails}
               className="btn"
             >
-              Add Favorite
+              View Details
             </button>
           </div>
         </div>

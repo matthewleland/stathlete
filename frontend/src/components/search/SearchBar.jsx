@@ -23,9 +23,11 @@ function SearchBar() {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mx-9 mb-8 gap-8">
       <div>
-        <div className="tabs tabs-boxed">
-          <button className="tab">Players</button>
-          <button className="tab tab-active">Teams</button>
+        <div className="tabs tabs-boxed my-4">
+          <button className="player-tab tab tab-active mx-auto ">
+            Players
+          </button>
+          <button className="team-tab tab mx-auto">Teams</button>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-control">
