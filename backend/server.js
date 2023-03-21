@@ -16,6 +16,7 @@ app.use('/api/favorites', require('./routes/favRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 
 app.use('/api/players', require('./routes/playerRoutes'))
+app.use('/api/teams', require('./routes/teamRoutes'))
 
 app.use(errorHandler)
 
