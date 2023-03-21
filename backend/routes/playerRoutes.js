@@ -10,6 +10,6 @@ const { protect } = require('../middleware/authMiddleware')
 
 router.route('/create').post(createPlayers)
 router.route('/search').get(searchPlayers)
-router.route('/details/:id').get(getPlayerDetails)
+router.route('/:id').get(getPlayerDetails)
 
 module.exports = router

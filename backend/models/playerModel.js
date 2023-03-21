@@ -2,6 +2,14 @@ const mongoose = require('mongoose')
 
 const playerSchema = mongoose.Schema(
   {
+    id: {
+      type: Number,
+      required: [true, 'Please add required field'],
+      unique: true,
+    },
+    imgUrl: {
+      type: String,
+    },
     firstName: {
       type: String,
       required: [true, 'Please add a first name'],
@@ -14,25 +22,19 @@ const playerSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add required field'],
     },
-    displayName: {
+    pos: {
       type: String,
-      required: [true, 'Please add required field'],
-    },
-    playerId: {
-      type: Number,
-      required: [true, 'Please add required field'],
-      unique: true,
     },
     teamId: {
       type: Number,
     },
+    teamName: {
+      type: String,
+    },
     jersey: {
       type: String,
     },
-    isActive: {
-      type: String,
-    },
-    pos: {
+    birthdate: {
       type: String,
     },
     heightFeet: {
@@ -44,22 +46,13 @@ const playerSchema = mongoose.Schema(
     weightPounds: {
       type: String,
     },
-    dateOfBirthUTC: {
-      type: String,
-    },
-    teams: {
-      type: Array,
-    },
-    draft: {
-      type: Object,
-    },
-    nbaDebutYear: {
+    rookieYear: {
       type: String,
     },
     yearsPro: {
       type: String,
     },
-    collegeName: {
+    college: {
       type: String,
     },
     country: {

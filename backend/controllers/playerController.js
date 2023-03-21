@@ -1,43 +1,85 @@
 const asyncHandler = require('express-async-handler')
+const url = require('url')
 const { models, model } = require('mongoose')
+const axios = require('axios')
 
 const playerData = require('../DATA/basicPlayerData.json')
 const { listenerCount } = require('../models/playerModel')
 
 const Player = require('../models/playerModel')
+const Team = require('../models/teamModel')
 
 // @desc    Create new players
 // @route   POST /api/players/create
 // @access  Restricted
 const createPlayers = asyncHandler(async (req, res) => {
-  const numPlayers = playerData.league.standard.length
   try {
-    let n = 1
-    for (i = 0; i < numPlayers; i++) {
-      let p = playerData.league.standard[i]
-      if (p.isActive === true) {
-        let full = p.firstName + ' ' + p.lastName
-        let player = await Player.create({
-          // firstName: p.firstName,
-          // lastName: p.lastName,
-          // fullName: full,
-          // displayName: p.temporaryDisplayName,
-          // playerId: p.personId,
-          // teamId: p.TeamId,
-          // jersey: p.jersey,
-          // isActive: p.isActive,
-          // pos: p.pos,
-          // heightFeet: p.heightFeet,
-          // heightInches: p.heightInches,
-          // weightPounds: p.weightPounds,
-          // dateOfBirthUTC: p.dateOfBirthUTC,
-          // teams: p.teams,
-          // draft: p.draft,
-          // nbaDebutYear: p.nbaDebutYear,
-          // yearsPro: p.yearsPro,
-          // collegeName: p.collegeName,
-          // country: p.country,
-        })
+    const teamsArr = await models.Team.find()
+    for (let t in teamsArr) {
+      let team = teamsArr[t]
+      let id = team.id
+      console.log(id)
+      let options = {
+        method: 'GET',
+        url: 'https://api-nba-v1.p.rapidapi.com/players',
+        params: { team: id, season: '2022' },
+        headers: {
+          'X-RapidAPI-Key': process.env.RAPID_API_KEY,
+          'X-RapidAPI-Host': process.env.RAPID_API_HOST,
+        },
+      }
+
+      let playersRes = await axios.request(options)
+      let playersArr = playersRes.data.response
+
+      let targetArr = playerData.league.standard
+
+      for (let p in playersArr) {
+        let player = playersArr[p]
+        let pPhotoId
+        let pImgUrl
+        let pPos
+        let pFullName
+        console.log(player)
+        if (player) {
+          let existingPlayer = await models.Player.find({
+            id: player.id,
+          })
+          if (existingPlayer.length === 0) {
+            for (let i in targetArr) {
+              let displayName = player.lastname + ', ' + player.firstname
+              let targetName = targetArr[i].temporaryDisplayName
+              if (displayName === targetName) {
+                pPhotoId = targetArr[i].personId
+                pImgUrl = `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${pPhotoId}.png`
+                pPos = targetArr[i].pos
+              }
+            }
+            pFullName = `${player.firstname} ${player.lastname}`
+
+            await Player.create({
+              id: player.id,
+              imgUrl: pImgUrl,
+              firstName: player.firstname,
+              lastName: player.lastname,
+              fullName: pFullName,
+              pos: pPos,
+              teamId: team.id,
+              teamName: team.name,
+              birthdate: player.birth.date,
+              heightFeet: player.height.feets,
+              heightInches: player.height.inches,
+              weightPounds: player.weight.pounds,
+              rookieYear: player.nba.start,
+              yearsPro: player.pro,
+              college: player.college,
+              country: player.birth.country,
+            })
+            console.log(
+              'new player: ' + player.firstname + ' ' + player.lastname
+            )
+          }
+        }
       }
     }
     res.status(201).send('Import player data complete')
@@ -51,8 +93,6 @@ const searchPlayers = asyncHandler(async (req, res) => {
     fullName: new RegExp(`.*${req.query.q}.*`, 'i'),
   })
 
-  console.log(results)
-
   if (results) {
     res.status(200).json(results)
   } else {
@@ -63,9 +103,10 @@ const searchPlayers = asyncHandler(async (req, res) => {
 
 const getPlayerDetails = asyncHandler(async (req, res) => {
   try {
-    console.log(req.body.id)
+    const id = Number(req.url.slice(1))
+    console.log(id)
     const results = await models.Player.findOne({
-      playerId: req.body.id,
+      playerId: id,
     })
 
     // console.log(results)
