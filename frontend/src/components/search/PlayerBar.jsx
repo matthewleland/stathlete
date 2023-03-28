@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { searchPlayers, reset } from '../../features/search/searchSlice'
 import { FaSearch } from 'react-icons/fa'
 
@@ -14,21 +15,44 @@ function SearchBar() {
   const handleChange = (e) => setText(e.target.value)
 
   const handleSubmit = async (e) => {
+    console.log(window.location.pathname)
     dispatch(reset())
     e.preventDefault()
-    dispatch(searchPlayers({ text }))
+    window.location.pathname === '/search/players'
+      ? dispatch(searchPlayers({ text }))
+      : console.log('Search teams')
     console.log(text)
   }
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mx-9 mb-8 gap-8">
       <div>
-        <div className="tabs tabs-boxed my-4">
-          <button className="player-tab tab tab-active mx-auto ">
-            Players
-          </button>
-          <button className="team-tab tab mx-auto">Teams</button>
-        </div>
+        {window.location.pathname === '/search/players' ? (
+          <div className="tabs tabs-boxed my-4">
+            <button className="player-tab tab tab-active mx-auto ">
+              Players
+            </button>
+            <Link
+              to="/search/teams"
+              className="team-tab tab mx-auto"
+            >
+              Teams
+            </Link>
+          </div>
+        ) : (
+          <div className="tabs tabs-boxed my-4">
+            <Link
+              to="/search/players"
+              className="team-tab tab mx-auto"
+            >
+              Players
+            </Link>
+            <button className="player-tab tab tab-active mx-auto ">
+              Teams
+            </button>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <div className="relative">

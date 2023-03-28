@@ -5,7 +5,8 @@ import Navbar from './components/layout/Navbar'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Search from './pages/Search'
+import PlayerSearch from './pages/PlayerSearch'
+import TeamSearch from './pages/TeamSearch'
 import Favorites from './pages/Favorites'
 import Profile from './pages/Profile'
 import Recover from './pages/Recover'
@@ -22,8 +23,12 @@ function App() {
             element={<Dashboard />}
           />
           <Route
-            path="/search"
-            element={<Search />}
+            path="/search/players"
+            element={<PlayerSearch />}
+          />
+          <Route
+            path="/search/teams"
+            element={<TeamSearch />}
           />
           <Route
             path="/login"

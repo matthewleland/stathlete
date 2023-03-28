@@ -14,11 +14,11 @@ function SearchResults() {
   )
   console.log(results)
 
-  // useEffect(() => {
-  //   // return () => {
-  //   //   dispatch(reset())
-  //   // }
-  // }, [results, isLoading, isError, message, dispatch])
+  useEffect(() => {
+    // return () => {
+    //   dispatch(reset())
+    // }
+  }, [results, isLoading, isError, message, dispatch])
 
   return (
     <div>
