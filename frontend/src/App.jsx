@@ -8,7 +8,8 @@ import Register from './pages/Register'
 import Search from './pages/Search'
 import Favorites from './pages/Favorites'
 import Profile from './pages/Profile'
-import Recover from './pages/recover'
+import Recover from './pages/Recover'
+import PlayerDetails from './pages/PlayerDetails'
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
           <Route
             path="/recover"
             element={<Recover />}
+          />
+          <Route
+            path="/players/:id"
+            element={<PlayerDetails />}
           />
         </Routes>
       </Router>
