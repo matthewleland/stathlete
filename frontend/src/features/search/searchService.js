@@ -8,7 +8,7 @@ const searchPlayers = async (text) => {
   //   }
   // }
 
-  console.log(text)
+  // console.log(text)
   const response = await axios.get('/api/players/search', {
     params: { q: text },
   })

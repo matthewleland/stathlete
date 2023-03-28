@@ -104,12 +104,9 @@ const searchPlayers = asyncHandler(async (req, res) => {
 const getPlayerDetails = asyncHandler(async (req, res) => {
   try {
     const id = Number(req.url.slice(1))
-    console.log(id)
     const results = await models.Player.findOne({
-      playerId: id,
+      id: id,
     })
-
-    // console.log(results)
     res.status(200).json(results)
   } catch (error) {
     console.log(error)

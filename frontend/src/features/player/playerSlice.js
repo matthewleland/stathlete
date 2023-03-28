@@ -9,12 +9,11 @@ const initialState = {
   message: '',
 }
 export const getPlayerDetails = createAsyncThunk(
-  'players/details',
-  async (playerData, thunkAPI) => {
+  'players/:id',
+  async (id, thunkAPI) => {
     try {
-      console.log(playerData)
-      return await playerService.getPlayerDetails(playerData.playerId)
-    } catch (error) {
+      return await playerService.getPlayerDetails(id)
+    } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
         err.message ||
@@ -39,12 +38,12 @@ export const playerSlice = createSlice({
       .addCase(getPlayerDetails.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        console.log(action)
         state.player = action.payload
       })
 
       .addCase(getPlayerDetails.rejected, (state, action) => {
-        ;(state.isLoading = false)((state.isError = true))
+        state.isLoading = false
+        state.isError = true
         state.message = action.payload
       })
   },

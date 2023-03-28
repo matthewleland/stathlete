@@ -3,16 +3,13 @@ import axios from 'axios'
 const API_URL = '/api/players/'
 
 // get player details
-const getPlayerDetails = async (playerData) => {
+const getPlayerDetails = async (id) => {
   // const config = {
   //   headers: {
   //     Authorization: `Bearer ${token}`,
   //   },
   // }
-  console.log(playerData)
-  const response = await axios.get('/api/players/details/:id', {
-    body: { id: playerData.playerId },
-  })
+  const response = await axios.get(`/api/players/${id}`)
 
   return response.data
 }
