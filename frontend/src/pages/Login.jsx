@@ -93,7 +93,7 @@ function Login() {
               </button>
             </div>
             <div className="my-2`">
-              <Link to="/recover">Forgot Password?</Link>
+              <Link to="/request">Forgot Password?</Link>
             </div>
             <button className="btn btn-primary">Button</button>
           </form>

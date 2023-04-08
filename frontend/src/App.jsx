@@ -10,6 +10,7 @@ import TeamSearch from './pages/TeamSearch'
 import Favorites from './pages/Favorites'
 import Profile from './pages/Profile'
 import Recover from './pages/Recover'
+import Request from './pages/Request'
 import PlayerDetails from './pages/PlayerDetails'
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
           <Route
             path="/profile"
             element={<Profile />}
+          />
+          <Route 
+            path="/request"
+            element={<Request />}
           />
           <Route
             path="/recover"
