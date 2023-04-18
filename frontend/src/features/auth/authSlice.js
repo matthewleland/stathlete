@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
+// import { create } from '../../../../backend/models/userModel'
 
 // get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'))
@@ -42,6 +43,32 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout()
+})
+
+// send password reset email
+export const sendEmail = createAsyncThunk('auth/passwordReset', async (email, thunkAPI) => {
+  try {
+    return await authService.sendEmail(email)
+  } catch (err) {
+    const message =
+      (err.response && err.response.data && err.response.data.message) ||
+      err.message ||
+      err.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// reset user password
+export const resetPassword = createAsyncThunk('auth/passwordReset', async (userId, token, password, thunkAPI) => {
+  try {
+    return await authService.resetPassword(userId, token, password)
+  } catch (err) {
+    const message =
+    (err.response && err.response.data && err.response.data.message) ||
+    err.message ||
+    err.toString()
+  return thunkAPI.rejectWithValue(message)
+  }
 })
 
 export const authSlice = createSlice({
