@@ -28,10 +28,37 @@ const logout = () => {
   localStorage.removeItem('user')
 }
 
+// send password reset email
+const sendEmail = async (email) => {
+  const response = await axios.post(API_URL + 'passwordReset', email)
+
+  /*
+  if (response.data) {
+    
+  }
+  */
+
+  return response.data
+}
+
+// reset user password
+const resetPassword = async (userId, token, password) => {
+  const response = await axios.post(API_URL + 'passwordReset', userId, token, password)
+
+  /*
+  if (response.data) {
+    
+  }
+  */
+ 
+  return response.data
+}
+
 const authService = {
   register,
   login,
-  logout
+  logout,
+  sendEmail
 }
 
 export default authService
