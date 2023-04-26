@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { resetPassword } from '../features/auth/authSlice'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 function Recover() {
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const token = searchParams.get('token')
+  const userId = searchParams.get('id')
+
 
   const [formData, setFormData] = useState({
     email: '',
@@ -20,14 +26,7 @@ function Recover() {
   }
 
   const onSubmit = (e) => {
-    e.preventDefault()
-
-    const userData = {
-      email,
-      newPassword
-    }
-
-    dispatch(resetPassword())
+    dispatch(resetPassword(userId, token, newPassword))
   }
 
   return (
@@ -85,7 +84,6 @@ function Recover() {
         >
           Submit
         </button>
-
 
       </form>
     </>
