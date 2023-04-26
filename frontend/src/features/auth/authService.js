@@ -58,7 +58,8 @@ const authService = {
   register,
   login,
   logout,
-  sendEmail
+  sendEmail,
+  resetPassword
 }
 
 export default authService
