@@ -90,12 +90,11 @@ const generateToken = (id) => {
 
 // TODO
 // @desc    Request to reset user password
-const requestPasswordReset = asyncHandler(async (email, res) => {
+const requestPasswordReset = asyncHandler(async (email) => {
 
     const user = await User.findOne({ email })
 
     if (!user) {
-        res.status(400)
         throw new Error('User does not exist')
     }
 
@@ -121,15 +120,13 @@ const requestPasswordReset = asyncHandler(async (email, res) => {
 
 // TODO
 // @desc    Reset user password
-const resetPassword = asyncHandler(async (userId, token, password, res) => {
+const resetPassword = asyncHandler(async (userId, token, password) => {
     let passwordResetToken = await Token.findOne({ userId });
     if (!passwordResetToken) {
-        res.status(400)
         throw new Error("Invalid or expired password reset token");
     }
     const isValid = await bcrypt.compare(token, passwordResetToken.token);
     if (!isValid) {
-        res.status(400)
         throw new Error("Invalid or expired password reset token");
     }
     const hash = await bcrypt.hash(password, Number(bcryptSalt));
