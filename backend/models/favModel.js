@@ -7,10 +7,9 @@ const favoriteSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    player: {
-      type: mongoose.Schema.Types.ObjectId,
+    details: {
+      type: Object,
       required: true,
-      ref: 'Player',
     },
   },
   {

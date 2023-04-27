@@ -92,10 +92,14 @@ function Login() {
                 Login
               </button>
             </div>
-            <div className="my-2`">
-              <Link to="/request">Forgot Password?</Link>
-            </div>
-            <button className="my-3 btn">Recover</button>
+
+            <div className="my-2`">Forgot Password?</div>
+            <Link
+              className="btn my-2"
+              to="/request"
+            >
+              Recover
+            </Link>
           </form>
         </section>
       </>

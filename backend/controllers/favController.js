@@ -19,50 +19,19 @@ const getFavorites = asyncHandler(async (req, res) => {
 // @route   POST /api/favorites
 // @access  Private
 const setFavorite = asyncHandler(async (req, res) => {
-  // if(!req.body.text) {
-  //     res.status(400)
-  //     throw new Error('Please add a text field')
-  // }
-  // const favorite = await Favorite.create({
-  //     text: req.body.text,
-  //     user: req.user.id
-  // })
-
-  if (!req.body.player.id) {
+  console.log(req.body)
+  if (!req.body) {
     res.status(400)
-    throw new Error('Please add a playerId')
+    throw new Error('Please add a player')
   }
 
-  const player = await models.Player.findOne({
-    id: req.body.player.id,
+  const favorite = await Favorite.create({
+    user: req.user.id,
+
+    details: req.body,
   })
 
-  console.log(player)
-  console.log(req.user)
-
-  //   const favorite = await Favorite.create({
-  //     playerId: req.body.playerId,
-  //     user: req.user.id,
-  //   })
-  console.log(req.user.id)
-
-  const results = await Player.updateOne(
-    { _id: req.user.id },
-    {
-      $push: {
-        favorites: {
-          player: {
-            id: player.id,
-            fullName: player.fullName,
-          },
-        },
-      },
-    }
-  )
-
-  console.log(results)
-
-  res.status(200).json(results)
+  res.status(200).json(favorite)
 })
 
 // @desc    Update favorite

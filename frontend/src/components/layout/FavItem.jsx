@@ -16,14 +16,14 @@ function FavItem({ favorite, showDelete }) {
               <div className="avatar">
                 <div className="rounded-full shadow w-14 h-14">
                   <img
-                    src={DefaultProfile}
+                    src={favorite.details.imgUrl}
                     alt="profile"
                   />
                 </div>
               </div>
             </div>
             <div>
-              <h2 className="card-title">{favorite.text}</h2>
+              <h2 className="card-title">{favorite.details.fullName}</h2>
               <Link
                 className="text-base-content text-opacity-40"
                 to=""

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getTeamDetails } from '../features/team/teamSlice'
 import Spinner from '../components/layout/Spinner'
 import PlayerItem from '../components/layout/PlayerItem'
+import { createFavorite } from '../features/favorites/favSlice'
 function TeamDetails() {
   const dispatch = useDispatch()
   const { teamDetails, isLoading, isError, message } = useSelector(
@@ -18,6 +19,7 @@ function TeamDetails() {
 
   const onAddFav = (e) => {
     e.preventDefault()
+    dispatch(createFavorite({ teamDetails }))
   }
 
   if (isLoading || !teamDetails.players) {

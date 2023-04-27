@@ -26,7 +26,7 @@ function PlayerDetails() {
   const onAddFav = (e) => {
     e.preventDefault()
 
-    dispatch(createFavorite({ player }))
+    dispatch(createFavorite({ playerDetails }))
   }
 
   if (isLoading || !playerDetails || !playerStats) {

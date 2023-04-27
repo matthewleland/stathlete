@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import TeamItem from '../components/layout/TeamItem'
+import PlayerItem from '../components/layout/PlayerItem'
 import FavForm from '../components/layout/FavForm'
 import FavItem from '../components/layout/FavItem'
 import Spinner from '../components/layout/Spinner'
@@ -43,12 +45,19 @@ function Dashboard() {
       <div>
         {favorites.length > 0 ? (
           <div className="grid grid-cols-1 gap-3 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 mx-4">
-            {favorites.map((favorite) => (
-              <FavItem
-                key={favorite._id}
-                favorite={favorite}
-              />
-            ))}
+            {favorites.map((favorite) =>
+              !favorite.details.fullName ? (
+                <TeamItem
+                  key={favorite._id}
+                  team={favorite.details.teamDetails}
+                />
+              ) : (
+                <PlayerItem
+                  key={favorite._id}
+                  player={favorite.details}
+                />
+              )
+            )}
           </div>
         ) : (
           <h3>You have not added any favorites</h3>

@@ -3,14 +3,14 @@ import axios from 'axios'
 const API_URL = '/api/favorites/'
 
 // create new favorite
-const createFavorite = async (favData, token) => {
+const createFavorite = async (details, token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   }
 
-  const response = await axios.post(API_URL, favData, config)
+  const response = await axios.post(API_URL, details, config)
 
   return response.data
 }
@@ -19,8 +19,8 @@ const createFavorite = async (favData, token) => {
 const getFavorites = async (token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   }
 
   const response = await axios.get(API_URL, config)
@@ -32,8 +32,8 @@ const getFavorites = async (token) => {
 const deleteFavorite = async (favId, token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   }
 
   const response = await axios.delete(API_URL + favId, config)
@@ -44,7 +44,7 @@ const deleteFavorite = async (favId, token) => {
 const favService = {
   createFavorite,
   getFavorites,
-  deleteFavorite
+  deleteFavorite,
 }
 
 export default favService
