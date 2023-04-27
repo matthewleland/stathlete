@@ -2,8 +2,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import DefaultProfile from '../../assets/profile.svg'
 
-function TeamItem({ team }) {
-  console.log(team)
+function TeamItem({ team, showDelete }) {
   return (
     <div className="flex flex-row justify-between card shadow-md compact side bg-base-200">
       <div className="flex-row items-center space-x-4 card-body">
@@ -27,6 +26,14 @@ function TeamItem({ team }) {
           </Link>
         </div>
       </div>
+      {showDelete ? (
+        <button
+          onClick={() => dispatch(deleteFavorite(team._id))}
+          className="close"
+        >
+          <p className="text-red-500">Delete Favorite</p>
+        </button>
+      ) : null}
     </div>
   )
 }

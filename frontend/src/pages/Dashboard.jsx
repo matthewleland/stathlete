@@ -49,12 +49,14 @@ function Dashboard() {
               !favorite.details.fullName ? (
                 <TeamItem
                   key={favorite._id}
-                  team={favorite.details.teamDetails}
+                  team={favorite.details}
+                  showDelete={false}
                 />
               ) : (
                 <PlayerItem
                   key={favorite._id}
                   player={favorite.details}
+                  showDelete={false}
                 />
               )
             )}

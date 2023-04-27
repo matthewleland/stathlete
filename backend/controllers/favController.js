@@ -19,7 +19,6 @@ const getFavorites = asyncHandler(async (req, res) => {
 // @route   POST /api/favorites
 // @access  Private
 const setFavorite = asyncHandler(async (req, res) => {
-  console.log(req.body)
   if (!req.body) {
     res.status(400)
     throw new Error('Please add a player')
@@ -27,7 +26,6 @@ const setFavorite = asyncHandler(async (req, res) => {
 
   const favorite = await Favorite.create({
     user: req.user.id,
-
     details: req.body,
   })
 
@@ -71,22 +69,18 @@ const updateFavorite = asyncHandler(async (req, res) => {
 // @route   DELETE /api/favorites/:id
 // @access  Private
 const deleteFavorite = asyncHandler(async (req, res) => {
-  const favorite = await Favorite.findById(req.params.id)
+  // console.log(req.params)
+  console.log(req.params.id)
+  console.log(req.user.id)
+  const favorite = await Favorite.find({
+    details: {
+      _id: req.params.id,
+    },
+  })
+  console.log(favorite)
   if (!favorite) {
     res.status(400)
     throw new Error('Favorite not found')
-  }
-
-  //checking for user
-  if (!req.user) {
-    res.status(401)
-    throw new Error('User not found')
-  }
-
-  //Make sure the log in users matches the favorites id user
-  if (favorite.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not authorized')
   }
 
   await favorite.remove()

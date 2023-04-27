@@ -4,6 +4,7 @@ const API_URL = '/api/favorites/'
 
 // create new favorite
 const createFavorite = async (details, token) => {
+  console.log(details)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

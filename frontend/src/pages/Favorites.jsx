@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import FavForm from '../components/layout/FavForm'
-import FavItem from '../components/layout/FavItem'
+import TeamItem from '../components/layout/TeamItem'
+import PlayerItem from '../components/layout/PlayerItem'
 import Spinner from '../components/layout/Spinner'
 import { getFavorites, reset } from '../features/favorites/favSlice'
 
@@ -42,22 +42,30 @@ function Favorites() {
         </h2>
       </section>
 
-      <FavForm />
-
       <section className="content m-5">
-        {favorites.length > 0 ? (
-          <div className="favorites">
-            {favorites.map((favorite) => (
-              <FavItem
-                key={favorite._id}
-                favorite={favorite}
-                showDelete={true}
-              />
-            ))}
-          </div>
-        ) : (
-          <h3>You have not added any favorites</h3>
-        )}
+        <div>
+          {favorites.length > 0 ? (
+            <div className="grid grid-cols-1 gap-3 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 mx-4">
+              {favorites.map((favorite) =>
+                !favorite.details.fullName ? (
+                  <TeamItem
+                    key={favorite._id}
+                    team={favorite.details}
+                    showDelete={true}
+                  />
+                ) : (
+                  <PlayerItem
+                    key={favorite._id}
+                    player={favorite.details}
+                    showDelete={true}
+                  />
+                )
+              )}
+            </div>
+          ) : (
+            <h3>You have not added any favorites</h3>
+          )}
+        </div>
       </section>
     </>
   )
