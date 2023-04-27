@@ -12,6 +12,7 @@ import Profile from './pages/Profile'
 import Recover from './pages/Recover'
 import Request from './pages/Request'
 import PlayerDetails from './pages/PlayerDetails'
+import TeamDetails from './pages/TeamDetails'
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
             path="/profile"
             element={<Profile />}
           />
-          <Route 
+          <Route
             path="/request"
             element={<Request />}
           />
@@ -58,6 +59,10 @@ function App() {
           <Route
             path="/players/:id"
             element={<PlayerDetails />}
+          />
+          <Route
+            path="/teams/:id"
+            element={<TeamDetails />}
           />
         </Routes>
       </Router>
