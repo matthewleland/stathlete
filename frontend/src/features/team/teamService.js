@@ -41,9 +41,31 @@ const getTeamStats = async (id) => {
   return trimmed
 }
 
+const getTeamStandings = async (id) => {
+  const options = {
+    method: 'GET',
+    url: 'https://api-nba-v1.p.rapidapi.com/standings',
+    params: {
+      league: 'standard',
+      season: '2022',
+      team: id,
+    },
+    headers: {
+      'content-type': 'application/octet-stream',
+      'X-RapidAPI-Key': '8bfc8ba653msha29b08fa4b30e05p1832cbjsn1b33b6d81643',
+      'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com',
+    },
+  }
+  const response = await axios.request(options)
+  console.log(response)
+
+  return response.data.response[0]
+}
+
 const teamService = {
   getTeamDetails,
   getTeamStats,
+  getTeamStandings,
 }
 
 export default teamService

@@ -25,10 +25,7 @@ ChartJS.register(
 function TenGameOChart() {
   const { playerStats } = useSelector((state) => state.player)
 
-  const lastTen = playerStats.slice(
-    playerStats.length - 11,
-    playerStats.length - 1
-  )
+  const lastTen = playerStats.slice(playerStats.length - 10, playerStats.length)
 
   const options = {
     responsive: true,
@@ -38,7 +35,8 @@ function TenGameOChart() {
       },
       title: {
         display: true,
-        text: 'Last Ten Games',
+        text: 'Performance Tracking: Last Ten Games',
+        size: 'large',
       },
     },
   }

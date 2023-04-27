@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   getPlayerDetails,
   getPlayerStats,
 } from '../features/player/playerSlice'
 import { createFavorite } from '../features/favorites/favSlice'
 import Spinner from '../components/layout/Spinner'
+import { GiBasketballBall } from 'react-icons/gi'
+import { toast } from 'react-toastify'
 import TenGameOChart from '../components/charts/player/TenGameOChart'
 
 function PlayerDetails() {
@@ -27,6 +30,7 @@ function PlayerDetails() {
     e.preventDefault()
     console.log(playerDetails)
     dispatch(createFavorite(playerDetails))
+    toast.success('New favorite added')
   }
 
   if (isLoading || !playerDetails || !playerStats) {
@@ -34,7 +38,7 @@ function PlayerDetails() {
   }
   return (
     <div>
-      <div className="flex flex-row mx-8 my-8">
+      <div className="flex items-center mx-8 my-8">
         <div className="avatar">
           <div className="rounded-full  w-24">
             <img
@@ -44,22 +48,45 @@ function PlayerDetails() {
           </div>
         </div>
         <div className="flex-1 mx-8">
-          <p className=" text-3xl font-bold">{playerDetails.fullName}</p>
-          <p className="text-xl">{playerDetails.teamName}</p>
-          <p className="text-lg">Position: {playerDetails.pos}</p>
-          {/* TODO: Add more player details */}
+          <div className="mx-4">
+            <p className="text-3xl font-bold">{playerDetails.fullName}</p>
+            <Link
+              to={`/teams/${playerDetails.teamId}`}
+              className="hover:underline text-xl"
+            >
+              {playerDetails.teamName}
+            </Link>
+          </div>
+          <div className="stats-shadow flex flex-row m-3 bg-neutral rounded-lg">
+            <div className="stat">
+              <div className="stat-title">Position</div>
+              <div className="stat-value">{playerDetails.pos}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-title">Height</div>
+              <div className="stat-value">
+                {playerDetails.heightFeet}' {playerDetails.heightInches}"
+              </div>
+            </div>
+            <div className="stat">
+              <div className="stat-title">Weight</div>
+              <div className="stat-value">
+                {playerDetails.weightPounds} lbs.
+              </div>
+            </div>
+          </div>
         </div>
 
         <button
           onClick={onAddFav}
-          className="btn btn-primary"
+          className="align-content-center btn btn-primary"
         >
           Add Favorite
         </button>
       </div>
       {playerStats.length > 0 ? (
-        <div className="overflow-x-auto m-8 rounded-md">
-          <div>
+        <div className="overflow-x-auto mx-8 rounded-md">
+          <div className="mx-8 p-4">
             <TenGameOChart />
           </div>
           <p className="my-4 text-xl">
@@ -83,20 +110,22 @@ function PlayerDetails() {
             </thead>
 
             <tbody>
-              {playerStats.map((game) => (
-                <tr key={game.game.id}>
-                  <th>{game.game.id}</th>
-                  <td>{game.points}</td>
-                  <td>{game.fgp}</td>
-                  <td>{game.assists}</td>
-                  <td>{game.totReb}</td>
-                  <td>{game.blocks}</td>
-                  <td>{game.steals}</td>
-                  <td>{game.turnovers}</td>
-                  <td>{game.pFouls}</td>
-                  <td>{game.min}</td>
-                </tr>
-              ))}
+              {playerStats
+                .map((game) => (
+                  <tr key={game.game.id}>
+                    <th>{game.game.id}</th>
+                    <td>{game.points}</td>
+                    <td>{game.fgp}</td>
+                    <td>{game.assists}</td>
+                    <td>{game.totReb}</td>
+                    <td>{game.blocks}</td>
+                    <td>{game.steals}</td>
+                    <td>{game.turnovers}</td>
+                    <td>{game.pFouls}</td>
+                    <td>{game.min}</td>
+                  </tr>
+                ))
+                .reverse()}
             </tbody>
           </table>
         </div>

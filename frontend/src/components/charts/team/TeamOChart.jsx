@@ -28,12 +28,18 @@ function TeamOChart() {
       },
       title: {
         display: true,
-        text: 'Offensive Performance',
+        text: 'Year to Year: Offensive Performance',
       },
     },
   }
 
-  const labels = ['18/19', '19/20', '20/21', '21/22', '22/23']
+  const labels = [
+    '2018/2019',
+    '2019/2020',
+    '2020/2021',
+    '2021/2022',
+    '2022/2023',
+  ]
 
   const data = {
     labels,
