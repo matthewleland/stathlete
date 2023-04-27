@@ -22,7 +22,7 @@ ChartJS.register(
   Tooltip,
   Legend
 )
-function TenGameChart() {
+function TenGameOChart() {
   const { playerStats } = useSelector((state) => state.player)
 
   const lastTen = playerStats.slice(
@@ -75,4 +75,4 @@ function TenGameChart() {
   )
 }
 
-export default TenGameChart
+export default TenGameOChart

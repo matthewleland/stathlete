@@ -1,16 +1,19 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getTeamDetails } from '../features/team/teamSlice'
+import { getTeamDetails, getTeamStats } from '../features/team/teamSlice'
 import Spinner from '../components/layout/Spinner'
 import PlayerItem from '../components/layout/PlayerItem'
+import TeamOChart from '../components/charts/team/TeamOChart'
 import { createFavorite } from '../features/favorites/favSlice'
+import { getPlayerStats } from '../features/player/playerSlice'
+import TeamDChart from '../components/charts/team/TeamDChart'
 function TeamDetails() {
   const dispatch = useDispatch()
-  const { teamDetails, isLoading, isError, message } = useSelector(
+  const { teamDetails, teamStats, isLoading, isError, message } = useSelector(
     (state) => state.team
   )
   const getTeamData = async (id) => {
-    await dispatch(getTeamDetails(id))
+    await dispatch(getTeamDetails(id)).then(await dispatch(getTeamStats(id)))
   }
   useEffect(() => {
     const id = window.location.pathname.slice(7)
@@ -19,10 +22,12 @@ function TeamDetails() {
 
   const onAddFav = (e) => {
     e.preventDefault()
-    dispatch(createFavorite({ teamDetails }))
+    console.log(teamDetails)
+
+    dispatch(createFavorite(teamDetails))
   }
 
-  if (isLoading || !teamDetails.players) {
+  if (isLoading || !teamDetails.players || !teamStats) {
     return <Spinner />
   }
   return (
@@ -49,6 +54,14 @@ function TeamDetails() {
           Add Favorites
         </button>
       </div>
+      {teamStats.length > 0 ? (
+        <div>
+          <TeamOChart />
+          <TeamDChart />
+        </div>
+      ) : (
+        <Spinner />
+      )}
       <div className="flex justify-center">
         <p className=" text-3xl font-bold m-4">Current Roster</p>
       </div>

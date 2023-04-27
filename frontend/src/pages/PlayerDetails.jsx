@@ -6,7 +6,7 @@ import {
 } from '../features/player/playerSlice'
 import { createFavorite } from '../features/favorites/favSlice'
 import Spinner from '../components/layout/Spinner'
-import TenGameChart from '../components/charts/player/TenGameChart'
+import TenGameOChart from '../components/charts/player/TenGameOChart'
 
 function PlayerDetails() {
   const { playerDetails, playerStats, isLoading, isError, message } =
@@ -25,8 +25,8 @@ function PlayerDetails() {
 
   const onAddFav = (e) => {
     e.preventDefault()
-
-    dispatch(createFavorite({ playerDetails }))
+    console.log(playerDetails)
+    dispatch(createFavorite(playerDetails))
   }
 
   if (isLoading || !playerDetails || !playerStats) {
@@ -60,7 +60,7 @@ function PlayerDetails() {
       {playerStats.length > 0 ? (
         <div className="overflow-x-auto m-8 rounded-md">
           <div>
-            <TenGameChart />
+            <TenGameOChart />
           </div>
           <p className="my-4 text-xl">
             Player Statistics for Season: 2022/2023

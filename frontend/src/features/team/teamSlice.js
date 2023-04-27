@@ -3,6 +3,7 @@ import teamService from './teamService'
 
 const initialState = {
   teamDetails: {},
+  teamStats: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -14,6 +15,21 @@ export const getTeamDetails = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       return await teamService.getTeamDetails(id)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const getTeamStats = createAsyncThunk(
+  'teams/stats/:id',
+  async (id, thunkAPI) => {
+    try {
+      return await teamService.getTeamStats(id)
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
@@ -42,6 +58,19 @@ export const teamSlice = createSlice({
         state.teamDetails = action.payload
       })
       .addCase(getTeamDetails.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getTeamStats.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getTeamStats.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.teamStats = action.payload
+      })
+      .addCase(getTeamStats.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
