@@ -1,33 +1,12 @@
 import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   getPlayerDetails,
   getPlayerStats,
 } from '../features/player/playerSlice'
 import { createFavorite } from '../features/favorites/favSlice'
 import Spinner from '../components/layout/Spinner'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
-
-import { useSelector, useDispatch } from 'react-redux'
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
+import TenGameChart from '../components/charts/player/TenGameChart'
 
 function PlayerDetails() {
   const { playerDetails, playerStats, isLoading, isError, message } =
@@ -38,9 +17,6 @@ function PlayerDetails() {
       await dispatch(getPlayerStats(id))
     )
   }
-
-  let labels = []
-  let datasets = []
 
   useEffect(() => {
     const id = window.location.pathname.slice(9)
@@ -83,6 +59,9 @@ function PlayerDetails() {
       </div>
       {playerStats.length > 0 ? (
         <div className="overflow-x-auto m-8 rounded-md">
+          <div>
+            <TenGameChart />
+          </div>
           <p className="my-4 text-xl">
             Player Statistics for Season: 2022/2023
           </p>
@@ -92,18 +71,30 @@ function PlayerDetails() {
               <tr>
                 <th>Game ID</th>
                 <th>Points</th>
+                <th>FG%</th>
                 <th>Assists</th>
                 <th>Rebounds</th>
+                <th>Blocks</th>
+                <th>Steals</th>
+                <th>Turnovers</th>
+                <th>Fouls</th>
+                <th>Minutes</th>
               </tr>
             </thead>
 
             <tbody>
               {playerStats.map((game) => (
-                <tr>
+                <tr key={game.game.id}>
                   <th>{game.game.id}</th>
                   <td>{game.points}</td>
+                  <td>{game.fgp}</td>
                   <td>{game.assists}</td>
                   <td>{game.totReb}</td>
+                  <td>{game.blocks}</td>
+                  <td>{game.steals}</td>
+                  <td>{game.turnovers}</td>
+                  <td>{game.pFouls}</td>
+                  <td>{game.min}</td>
                 </tr>
               ))}
             </tbody>
