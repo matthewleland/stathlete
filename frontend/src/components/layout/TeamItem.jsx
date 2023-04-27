@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import DefaultProfile from '../../assets/profile.svg'
+import { BsTrashFill } from 'react-icons/bs'
+import { toast } from 'react-toastify'
 
 function TeamItem({ team, showDelete }) {
   return (
@@ -28,10 +30,10 @@ function TeamItem({ team, showDelete }) {
       </div>
       {showDelete ? (
         <button
-          onClick={() => dispatch(deleteFavorite(team._id))}
+          onClick={() => toast.warning('Cannot delete: feature in development')}
           className="close"
         >
-          <p className="text-red-500">Delete Favorite</p>
+          <BsTrashFill className="text-4xl mx-5 fill-error" />
         </button>
       ) : null}
     </div>

@@ -8,6 +8,7 @@ import { searchPlayers, reset } from '../../features/search/searchSlice'
 
 function SearchResults() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { results, isLoading, isError, message } = useSelector(
     (state) => state.search
@@ -15,10 +16,12 @@ function SearchResults() {
   console.log(results)
 
   useEffect(() => {
-    // return () => {
-    //   dispatch(reset())
-    // }
+    // dispatch(reset())
   }, [results, isLoading, isError, message, dispatch])
+
+  useEffect(() => {
+    dispatch(reset())
+  }, [navigate])
 
   return (
     <div>

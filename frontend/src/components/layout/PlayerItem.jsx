@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { deleteFavorite } from '../../features/favorites/favSlice'
 import DefaultProfile from '../../assets/profile.svg'
 import { BsTrashFill } from 'react-icons/bs'
+import { toast } from 'react-toastify'
 
 function PlayerItem({ player, showDelete }) {
   const dispatch = useDispatch()
@@ -33,10 +34,10 @@ function PlayerItem({ player, showDelete }) {
       </div>
       {showDelete ? (
         <button
-          onClick={() => dispatch(deleteFavorite(player._id))}
+          onClick={() => toast.warning('Cannot delete: feature in development')}
           className="close"
         >
-          <BsTrashFill className="text-4xl mx-5 fill-red-600" />
+          <BsTrashFill className="text-4xl mx-5 fill-error" />
         </button>
       ) : null}
     </div>

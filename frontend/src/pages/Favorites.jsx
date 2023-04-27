@@ -36,11 +36,9 @@ function Favorites() {
   }
   return (
     <>
-      <section className="heading flex justify-center">
-        <h2 className="underline text-2xl font-bold">
-          Welcome to your Favorites Page
-        </h2>
-      </section>
+      <header className="heading flex m-5">
+        <h2 className="text-2xl font-bold">Favorites - {user.name}</h2>
+      </header>
 
       <section className="content m-5">
         <div>

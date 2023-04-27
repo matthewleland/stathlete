@@ -58,12 +58,6 @@ function Navbar({ title }) {
                   <ul className="p-2 bg-base-100">
                     <li>
                       <Link
-                        to="/profile"
-                        className="btn btn-ghost btn-sm rounded-btn"
-                      >
-                        Profile
-                      </Link>
-                      <Link
                         to="/favorites"
                         className="btn btn-ghost btn-sm rounded-btn"
                       >

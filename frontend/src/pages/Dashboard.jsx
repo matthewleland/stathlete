@@ -62,7 +62,7 @@ function Dashboard() {
             )}
           </div>
         ) : (
-          <h3>You have not added any favorites</h3>
+          <h3 className="mx-5">You have not added any favorites</h3>
         )}
       </div>
     </>
