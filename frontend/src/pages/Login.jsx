@@ -87,7 +87,7 @@ function Login() {
             <div className="form-group my-3 mb-5">
               <button
                 type="submit"
-                className="btn btn-block"
+                className="btn btn-primary btn-block"
               >
                 Login
               </button>
@@ -95,7 +95,7 @@ function Login() {
             <div className="my-2`">
               <Link to="/request">Forgot Password?</Link>
             </div>
-            <button className="btn btn-primary">Button</button>
+            <button className="my-3 btn">Recover</button>
           </form>
         </section>
       </>

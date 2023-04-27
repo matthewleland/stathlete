@@ -20,7 +20,7 @@ function Dashboard() {
       console.log(message)
     }
 
-    if (!user) {
+    if (user === null) {
       navigate('/login')
     } else {
       dispatch(getFavorites())
@@ -31,7 +31,7 @@ function Dashboard() {
     }
   }, [user, navigate, isError, message, dispatch])
 
-  if (isLoading) {
+  if (isLoading || !user) {
     return <Spinner />
   }
   return (
