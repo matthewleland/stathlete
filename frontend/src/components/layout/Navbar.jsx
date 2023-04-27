@@ -42,7 +42,7 @@ function Navbar({ title }) {
                 </li>
                 <li>
                   <Link
-                    to="/search"
+                    to="/search/players"
                     className="btn btn-ghost btn-sm rounded-btn"
                   >
                     Search

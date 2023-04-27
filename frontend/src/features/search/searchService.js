@@ -15,8 +15,16 @@ const searchPlayers = async (text) => {
   return response.data
 }
 
+const searchTeams = async (text) => {
+  const response = await axios.get('/api/teams/search', {
+    params: { q: text },
+  })
+  return response.data
+}
+
 const searchService = {
   searchPlayers,
+  searchTeams,
 }
 
 export default searchService

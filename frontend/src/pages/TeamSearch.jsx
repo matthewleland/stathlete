@@ -1,5 +1,5 @@
-import SearchBar from '../components/search/PlayerBar'
-import SearchResults from '../components/search/PlayerResults'
+import SearchBar from '../components/search/TeamBar'
+import SearchResults from '../components/search/TeamResults'
 
 function TeamSearch() {
   return (

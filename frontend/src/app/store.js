@@ -3,6 +3,7 @@ import authReducer from '../features/auth/authSlice'
 import favReducer from '../features/favorites/favSlice'
 import searchReducer from '../features/search/searchSlice'
 import playerReducer from '../features/player/playerSlice'
+import teamReducer from '../features/team/teamSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     favorites: favReducer,
     search: searchReducer,
     player: playerReducer,
+    team: teamReducer,
   },
 })

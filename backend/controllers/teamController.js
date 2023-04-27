@@ -50,6 +50,56 @@ const createTeams = asyncHandler(async (req, res) => {
   }
 })
 
+const searchTeams = asyncHandler(async (req, res) => {
+  const results = await models.Team.find({
+    name: new RegExp(`.*${req.query.q}.*`, 'i'),
+  })
+
+  if (results) {
+    res.status(200).json(results)
+  } else {
+    res.status(400)
+    throw new Error('Error executing')
+  }
+})
+
+const getTeamDetails = asyncHandler(async (req, res) => {
+  try {
+    const id = Number(req.url.slice(1))
+    const details = await models.Team.findOne({
+      id: id,
+    })
+    const players = await models.Player.find({
+      teamId: id,
+    })
+    const results = {
+      ...details.toObject(),
+      players: players,
+    }
+
+    res.status(200).json(results)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
+})
+
+const getTeamPlayers = asyncHandler(async (req, res) => {
+  try {
+    const id = Number(req.url.slice(1))
+    const players = await models.Player.find({
+      teamId: id,
+    })
+    res.status(200).json(results)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
+})
+
 module.exports = {
   createTeams,
+  searchTeams,
+  getTeamDetails,
+  getTeamPlayers,
 }
