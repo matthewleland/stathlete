@@ -1,82 +1,63 @@
 # Stathlete
-Stathlete is a web application powered by React and Node.js that provides users with the power to look up the complete statistics of their favorite NBA players and teams. 
+Stathlete is a web application powered by React and Node.js that provides users with a platform to search, save, and learn about their favorite NBA players and teams. Gain insight, make better decisions, and be in the know.
 
-## (TODO) Requirements to Run the Application
+## Requirements to Run the Application
 * [NodeJS LTS (includes NPM)](https://nodejs.org/en/download/)
 
-## (TODO) Installation Process
+## Installation Process
+In your terminal, clone the repository to your working directory.
 
-# (TODO) Stathlete Server
+## Stathlete Server
 
-This is the server side of the Stathlete app which is powered by NodeJS and many other libraries.
+Stathlete's backend  which is powered by NodeJS, Express, and MongoDB.
 
-This is how to download the dependencies to get yourself started.
-
-## (TODO) Prepare the environment
+## Prepare the environment
 
 - Install NodeJS and NPM
-- In your Terminal or Command Prompt, run the following at the root of the project directory:
+- In your Terminal or Command Prompt, run the following at the root of the <code>stathlete</code> directory:
 
 ```
-$ npm i
+$ npm install
 ```
 
-## (TODO) Prepare the environment variables
+## Prepare the environment variables
 
 - Create an .env file, by renaming the provided sample .sample.env
 - Add the secrets and variables to the .env file
 
-## (TODO) How to run the project using NodeJS
+## Stathlete Client
 
-In your Terminal or Command Prompt, run the following at the root of the project directory to run the server, which will expose the application on the port specified in the .env file:
+Stathlete's front end is powered by React, Redux, TailwindCSS, react-chartjs-2, and DaisyUI
+## Prepare the environment
 
-```
-$ npm run dev
-```
+- Install the necessary client dependencies.
+- In your Terminal or Command Prompt, run the following at the root of the <code>frontend</code> directory:
 
-# (TODO) Stathlete Client
-This is the client side of the Stathlete app which is powered by React.
-
-We will use tools such as npm to run and test our application.
-
-**Make sure that the server is running at the same time in order to avoid 404 errors from our builtin API's.**
-
-## (TODO) Prepare the Environment
-
-## (TODO) Initially Installing the Dependencies
-In your Terminal or Command Prompt, run the following command at the root directory:
 ```
 $ npm install
 ```
 
-Then, navigate to the `frontend` directory:
-```
-$ cd frontend
-```
+##  How to run the development server
 
-Once you are in the `frontend` directory, run the following command: 
-```
-$ npm install
-```
+In your Terminal or Command Prompt, run the following at the root of the <code>stathlete</code> directory to run the server, which will expose the application on the port specified in the .env file:
 
-## (TODO) Running the application
-In your Terminal or Command Prompt, run the following command at the `client` directory:
 ```
 $ npm run dev
 ```
+This concurrently starts local development servers for both the server and client.
 
-## (TODO) Stathlete's UI
-#### (TODO) **Authentication**
+##  Stathlete's UI
+####  **Authentication**
 
-#### (TODO) **Dashboard**
+#### **Dashboard**
 
-#### (TODO) **Search**
+#### **Search**
 
-#### (TODO) **Favorites**
+#### **Favorites**
 
-#### (TODO) **Profile**
+#### **Profile**
 
-## (TODO) Meet the Team
+##  Meet the Team
 * [Matthew Leland](https://github.com/matthewleland) - Project Lead
 * [Joshua Lee](https://github.com/0MN1DR01D) - Software Developer
 * [Delverone Simpson](https://github.com/dsimpson20) - Software Developer
